@@ -14,7 +14,7 @@ import NotFound from './NotFound.vue'
 
 const routes = {
   '/': Login,
-  '/about': Gallery
+  '/gallery': Gallery
 }
 // currentPath is a reactive ref object
 const currentPath = ref(window.location.hash)

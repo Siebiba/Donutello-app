@@ -24,25 +24,26 @@ const login = async () => {
             "username": username.value,
             "password": password.value
         })
-    }).then(response => response.json()).then(json =>{
-        console.log(json);
+        }).then(response => response.json()).then(json => {
+            console.log(json);
 
-  
-        if (json.status == "success") {
 
-          
-            console.log("success");
+            if (json.status == "success") {
 
-            let token = json.data.token;
-            localStorage.setItem('token', token);
-            
-          
-        
-        }
-        else {
-            console.log("failed");
-        }
-    });
+
+                console.log("success");
+
+                //when successful login, save token in local storage
+                let token = json.data.token;
+                localStorage.setItem('token', token);
+
+                // when successful login, redirect to gallery page
+                window.location.href = "#/gallery"
+
+            } else {
+                console.log("failed");
+            }
+        });
 
 }
 
