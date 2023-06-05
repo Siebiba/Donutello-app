@@ -1,28 +1,66 @@
 
+<script setup>
+
+import { ref } from 'vue'
+
+let username = ref('')
+let password = ref('')
+let error = ref('')
+
+//console.log value of mail
+
+
+const login = async () => {
+ 
+    console.log('login');
+  error.value = ''
+ 
+  fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": username.value,
+            "password": password.value
+        })
+    }).then(response => response.json()).then(json =>{
+        console.log(json);
+
+  
+        if (json.status == "success") {
+
+          
+            console.log("success");
+
+            let token = json.data.token;
+            localStorage.setItem('token', token);
+            
+          
+        
+        }
+        else {
+            console.log("failed");
+        }
+    });
+
+}
+
+
+</script>
+
 <template>
-    <form name="login-form" >
+    <form name="login-form" @submit.prevent="login" >
       <div class="">
-        <label for="username">Username: </label>
-        <input id="username" type="text" />
+        <label for="mail">Username: </label>
+        <input id="username" type="username" v-model="username" />
       </div>
       <div class="">
         <label for="password">Password: </label>
-        <input id="password" type="password" />
+        <input id="password" type="password" v-model="password"/>
       </div>
-      <button class="btn btn-login" type="submit">
-        Login
-      </button>
+     
+        <button type="submit" class="btn btn-primary" >Login</button>
     </form>
 </template>
 
-<script>
-export default {
-  name: 'LoginForm',
-  setup() {
-    return {
-      username: '',
-      password: '',
-    }
-  },
-}
-</script>
