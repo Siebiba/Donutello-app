@@ -78,7 +78,22 @@ fetch('http://localhost:3000/api/v1/donuts/'+ id, {
 
 }
 
-const color = ref('red')
+
+const showDetails = (event) =>
+{
+   //toggle dipslay block and none to details div of this donut order when clicking on button showDetails
+  //  event.target.parentElement.querySelector("#details").style.display = "none";
+
+   
+  let details = event.target.parentElement.querySelector("#details");
+    if (details.style.display === "none") {
+        details.style.display = "block";
+    } else {
+        details.style.display = "none";
+    }
+
+
+}
 
 
 
@@ -91,13 +106,12 @@ const color = ref('red')
         <ul class="donut-orders">
             <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
 
-                <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
+                <button @click="deleteDonut"  v-bind:id="donutOrder._id">Delete</button>
 
 
                 <h2>{{ donutOrder.name }}</h2>
-                <p>{{ donutOrder.company }}</p>
-                <p>{{ donutOrder.topping }}</p>
-                <p>{{ donutOrder.quantity }}</p>
+          
+               
 
                 <div v-if="donutOrder.glaze === 'vanille'">
                     <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
@@ -111,6 +125,19 @@ const color = ref('red')
                 <div v-else>
                     Not A/B/C
                 </div>
+
+                <div class="details">
+                    <div id="details">
+                        <p>k,sak,skz,kaz</p>
+                        <p>{{ donutOrder.name }}</p>
+                        <p>{{ donutOrder.company }}</p>
+                        <p>{{ donutOrder.glaze }}</p>
+                     
+                    </div>
+
+                </div>
+
+                <button @click="showDetails">Meer info</button>
             </li>
         </ul>
     </div>
@@ -141,11 +168,16 @@ li {
 .donut-order {
     border: 1px solid #ccc;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin:1rem;
     width: 20%;
     height: 200px;
+    border-radius: 20px;
 }
 
+.details {
+
+    background-color: aqua;
+}
 
 
 
