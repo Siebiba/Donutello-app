@@ -1,6 +1,6 @@
-<script>
+<script setup>
 
-/*import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 let donutOrders = reactive({ donuts: [] });
 
@@ -21,10 +21,11 @@ onMounted(() => {
     //assign parsed data to reactive object
     donutOrders.donuts = parsedData;
     console.log(donutOrders.donuts);
+
     });
 })
-*/ 
 
+/*
 //export default donutOrders;
 export default {
     data() {
@@ -49,7 +50,33 @@ export default {
         .catch(err => console.log(err))
     }
 }
+*/ 
 
+//deleteDonut + event.target.id
+
+const deleteDonut = (event) => {
+event.preventDefault();
+console.log("delete donut");
+let id = event.target.id;
+console.log(id);
+
+
+fetch('http://localhost:3000/api/v1/donuts/'+ id, {
+    method: 'DELETE',
+    headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+})
+.then(response => response.json())
+.then(data => {
+  event.target.parentElement.parentElement.remove();
+    console.log(data);
+    window.location.href = "index.html/#/gallery"
+})
+
+
+}
 
 
 
@@ -62,7 +89,10 @@ export default {
     <div class="gallery">
         <h1>Donut Orders</h1>
         <ul class="donut-orders">
-            <li class="donut-order" v-for="donutOrder in donutOrders" :key="donutOrder.id">
+            <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
+         
+            <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
+        
                 <h2>{{ donutOrder.name }}</h2>
                 <p>{{ donutOrder.company }}</p>
                 <p>{{ donutOrder.topping }}</p>
@@ -70,6 +100,10 @@ export default {
             </li>
         </ul>
     </div>
+
+ 
+ 
+
 </template>
 
 <style scoped>
