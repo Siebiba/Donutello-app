@@ -78,11 +78,11 @@ fetch('http://localhost:3000/api/v1/donuts/'+ id, {
 
 }
 
+const color = ref('red')
+
 
 
 </script>
-
-
 
 
 <template>
@@ -90,13 +90,27 @@ fetch('http://localhost:3000/api/v1/donuts/'+ id, {
         <h1>Donut Orders</h1>
         <ul class="donut-orders">
             <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
-         
-            <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
-        
+
+                <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
+
+
                 <h2>{{ donutOrder.name }}</h2>
                 <p>{{ donutOrder.company }}</p>
                 <p>{{ donutOrder.topping }}</p>
                 <p>{{ donutOrder.quantity }}</p>
+
+                <div v-if="donutOrder.glaze === 'vanille'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div v-else-if="color === 'blue'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div v-else-if="color === 'yellow'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div v-else>
+                    Not A/B/C
+                </div>
             </li>
         </ul>
     </div>
