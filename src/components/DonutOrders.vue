@@ -248,19 +248,16 @@ li {
 @media (max-width: 800px) {
   
     .donut-order {
-        list-style: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 1rem;
-        margin:1rem;
+      
         width: 200px;
         height: 240px;
-        border-radius: 20px;
+        
     }
+
     
     .donut-order img {
-        width: 200px;
-        height: auto;
-        padding: 0.2rem;
+        width: 120px;
+      
     }
 }
 
