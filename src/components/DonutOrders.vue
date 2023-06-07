@@ -78,15 +78,16 @@ fetch('https://donutello-api.onrender.com/api/v1/donuts/'+ id, {
 
 }
 
-
+/*
 const showDetails = (event) =>
 {
    //toggle dipslay block and none to details div of this donut order when clicking on button showDetails
   //  event.target.parentElement.querySelector("#details").style.display = "none";
 
    
-  let details = event.target.parentElement.querySelector("#details");
+  let details = event.target.parentElement.querySelector(".details");
     if (details.style.display === "none") {
+        console.log("show details")
         details.style.display = "block";
     } else {
         details.style.display = "none";
@@ -95,10 +96,27 @@ const showDetails = (event) =>
 
 }
 
+*/
+
+//add event listener to button showDetails ad toggle display on and off
+const showDetails = (event) => {
+    event.preventDefault();
+    console.log("show details");
+    let details = event.target.parentElement.querySelector(".details");
+    if (details.style.display == "none") {
+        console.log("show details")
+        details.style.display = "block";
+    } else {
+        details.style.display = "none";
+    }
+}
+
+
+
+
 
 
 </script>
-
 
 <template>
     <div class="gallery">
@@ -106,34 +124,34 @@ const showDetails = (event) =>
         <ul class="donut-orders">
             <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
 
-                <button @click="deleteDonut"  v-bind:id="donutOrder._id">Delete</button>
+                <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
 
 
                 <h2>{{ donutOrder.name }}</h2>
-          
-               
 
-                <div v-if="donutOrder.glaze === 'vanille'">
+
+
+                <div v-if="donutOrder.glaze === 'cherry'">
                     <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
                 </div>
-                <div v-else-if="color === 'blue'">
+                <div v-else-if="color === 'pistache'">
                     <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
                 </div>
-                <div v-else-if="color === 'yellow'">
+                <div v-else-if="color === 'chocolate'">
                     <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
                 </div>
                 <div v-else>
                     Not A/B/C
                 </div>
 
-                <div class="details">
-                    <div id="details">
-                        <p>k,sak,skz,kaz</p>
-                        <p>{{ donutOrder.name }}</p>
-                        <p>{{ donutOrder.company }}</p>
-                        <p>{{ donutOrder.glaze }}</p>
-                     
-                    </div>
+
+                <div class="details"  style="display: none;">
+                    <p>k,sak,skz,kaz</p>
+                    <p>{{ donutOrder.name }}</p>
+                    <p>{{ donutOrder.company }}</p>
+                    <p>{{ donutOrder.glaze }}</p>
+
+
 
                 </div>
 
@@ -163,20 +181,32 @@ li {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 .donut-order {
-    border: 1px solid #ccc;
+    list-style: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     padding: 1rem;
     margin:1rem;
-    width: 20%;
+    width: 200px;
     height: 200px;
     border-radius: 20px;
 }
 
+.donut-order img {
+    width: 200px;
+    height: auto;
+    padding: 0.2rem;
+}
+
+
+
+
+
 .details {
 
-    background-color: aqua;
+    background-color: rgb(240, 240, 240);
+    
 }
 
 

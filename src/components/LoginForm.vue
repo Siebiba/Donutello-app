@@ -97,7 +97,7 @@ const login = async () => {
 border: none;
   font-size: 1.2em;
   padding: 0.5em;
-  border-radius: 0.2em;
+  border-radius: 0.4em;
   border: 1px solid #ccc;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
