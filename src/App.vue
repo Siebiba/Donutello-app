@@ -29,11 +29,11 @@ const currentView = computed(() => {
 </script>
 
 <template>
-
+ <Navigation/>
   <component :is="currentView" />
 
 
-  <Navigation/>
+ 
 
 
 </template>
