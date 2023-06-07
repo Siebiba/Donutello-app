@@ -15,7 +15,7 @@ const login = async () => {
     console.log('login');
   error.value = ''
  
-  fetch('http://localhost:3000/users/login', {
+  fetch('https://donutello-api.onrender.com/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -65,3 +65,17 @@ const login = async () => {
     </form>
 </template>
 
+<style scoped>
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+
+
+
+</style>

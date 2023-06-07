@@ -5,7 +5,7 @@ import { onMounted, reactive, ref } from 'vue'
 let donutOrders = reactive({ donuts: [] });
 
 onMounted(() => {
-    fetch('http://localhost:3000/api/v1/donuts', {
+    fetch('https://donutello-api.onrender.com/api/v1/donuts', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ let id = event.target.id;
 console.log(id);
 
 
-fetch('http://localhost:3000/api/v1/donuts/'+ id, {
+fetch('https://donutello-api.onrender.com/api/v1/donuts/'+ id, {
     method: 'DELETE',
     headers: {
             'Content-Type': 'application/json',
