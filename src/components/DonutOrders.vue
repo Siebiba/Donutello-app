@@ -158,7 +158,7 @@ const logout = () => {
                     <button class="btn-show" @click="showDetails">Meer info</button>
 
                     <div class="details" style="display: none;">
-                        <h4>Name of Designer</h4>
+                        <h4>Id number user</h4>
                         <p>{{ donutOrder.user }}</p>
                         <h4>Name of company</h4>
                         <p>{{ donutOrder.company }}</p>
