@@ -72,7 +72,9 @@ fetch('https://donutello-api.onrender.com/api/v1/donuts/'+ id, {
 .then(data => {
   event.target.parentElement.parentElement.remove();
     console.log(data);
-    window.location.href = "index.html/#/gallery"
+    //reload page but keep scroll position
+    window.location.reload({ behavior: 'auto', keepScrollPosition: true });
+
 })
 
 
@@ -124,38 +126,42 @@ const showDetails = (event) => {
         <ul class="donut-orders">
             <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
 
-                <button @click="deleteDonut" v-bind:id="donutOrder._id">Delete</button>
+                <button class= "btn-delete" @click="deleteDonut" v-bind:id="donutOrder._id">X</button>
 
 
+                
+
+
+
+                <div class="donut-image" v-if="donutOrder.glaze === 'cherry'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div class="donut-image" v-else-if="color === 'pistache'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div class="donut-image" v-else-if="color === 'chocolate'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+                <div class="donut-image" v-else="color === 'none'">
+                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
+                </div>
+
+                <div class="info">
+             
                 <h2>{{ donutOrder.name }}</h2>
 
-
-
-                <div v-if="donutOrder.glaze === 'cherry'">
-                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
-                </div>
-                <div v-else-if="color === 'pistache'">
-                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
-                </div>
-                <div v-else-if="color === 'chocolate'">
-                    <img src="../assets/Donut.png" alt="vanille" width="100" height="100">
-                </div>
-                <div v-else>
-                    Not A/B/C
-                </div>
-
-
-                <div class="details"  style="display: none;">
-                    <p>k,sak,skz,kaz</p>
-                    <p>{{ donutOrder.name }}</p>
-                    <p>{{ donutOrder.company }}</p>
-                    <p>{{ donutOrder.glaze }}</p>
-
-
-
-                </div>
-
+                
                 <button @click="showDetails">Meer info</button>
+                
+                <div class="details"  style="display: none;">
+                    <h3>Name of Designer</h3>
+                    <p>{{ donutOrder.username }}</p>
+                    <h3>Name of company</h3>
+                    <p>{{ donutOrder.company }}</p>
+                    <h3>Choose of Glaze</h3>
+                    <p>{{ donutOrder.glaze }}</p>
+                </div>
+            </div>
             </li>
         </ul>
     </div>
@@ -172,7 +178,11 @@ li {
 }
 
 .gallery {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
 }
 
 .donut-orders{
@@ -184,30 +194,76 @@ li {
     margin-top: 4rem;
 }
 .donut-order {
+    display: block;
     list-style: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding: 1rem;
+
     margin:1rem;
-    width: 200px;
-    height: 200px;
+    width: 320px;
+    height: 400px;
     border-radius: 20px;
 }
 
 .donut-order img {
+
+    display: block;
     width: 200px;
     height: auto;
     padding: 0.2rem;
+    margin: auto;
+   
 }
 
+.info{
+    margin: 2rem;
+    position: absolute;
+    margin-top: 1rem;
+}
 
+.donut-image {
+    margin: auto;
+    background-color: antiquewhite;
+    border-radius: 20px 20px 0 0;
+}
 
-
-
-.details {
-
-    background-color: rgb(240, 240, 240);
+.btn-delete{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    padding: 0.5rem;
     
+    cursor: pointer;
+    margin: 0.5rem;
+ 
+ 
+
 }
+
+
+
+@media (max-width: 800px) {
+  
+    .donut-order {
+        list-style: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 1rem;
+        margin:1rem;
+        width: 200px;
+        height: 240px;
+        border-radius: 20px;
+    }
+    
+    .donut-order img {
+        width: 200px;
+        height: auto;
+        padding: 0.2rem;
+    }
+}
+
 
 
 
