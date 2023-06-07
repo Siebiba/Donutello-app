@@ -114,22 +114,30 @@ const showDetails = (event) => {
 }
 
 
-
-
+const logout = () => {
+    console.log("logout");
+   localStorage.clear();
+   window.location.href = "#/"
+}
 
 
 </script>
 
 <template>
+    <div class="btn-logout">
+        <a href="#" @click.prevent="logout">Log out</a>
+    </div>
+
     <div class="gallery">
+
         <h1>Donut Orders</h1>
         <ul class="donut-orders">
             <li class="donut-order" v-for="donutOrder in donutOrders.donuts" :key="donutOrder.id">
 
-                <button class= "btn-delete" @click="deleteDonut" v-bind:id="donutOrder._id">X</button>
+                <button class="btn-delete" @click="deleteDonut" v-bind:id="donutOrder._id">X</button>
 
 
-                
+
 
 
 
@@ -147,21 +155,21 @@ const showDetails = (event) => {
                 </div>
 
                 <div class="info">
-             
-                <h2>{{ donutOrder.name }}</h2>
 
-                
-                <button @click="showDetails">Meer info</button>
-                
-                <div class="details"  style="display: none;">
-                    <h3>Name of Designer</h3>
-                    <p>{{ donutOrder.username }}</p>
-                    <h3>Name of company</h3>
-                    <p>{{ donutOrder.company }}</p>
-                    <h3>Choose of Glaze</h3>
-                    <p>{{ donutOrder.glaze }}</p>
+                    <h2>{{ donutOrder.name }}</h2>
+
+
+                    <button @click="showDetails">Meer info</button>
+
+                    <div class="details" style="display: none;">
+                        <h3>Name of Designer</h3>
+                        <p>{{ donutOrder.username }}</p>
+                        <h3>Name of company</h3>
+                        <p>{{ donutOrder.company }}</p>
+                        <h3>Choose of Glaze</h3>
+                        <p>{{ donutOrder.glaze }}</p>
+                    </div>
                 </div>
-            </div>
             </li>
         </ul>
     </div>
@@ -171,9 +179,7 @@ const showDetails = (event) => {
 
 </template>
 
-<style scoped>
-
-li {
+<style scoped>li {
     list-style: none;
 }
 
@@ -185,7 +191,7 @@ li {
     margin-top: 4rem;
 }
 
-.donut-orders{
+.donut-orders {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -193,12 +199,12 @@ li {
     justify-content: center;
     margin-top: 4rem;
 }
+
 .donut-order {
     display: block;
     list-style: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-    margin:1rem;
+    margin: 1rem;
     width: 320px;
     height: 400px;
     border-radius: 20px;
@@ -211,10 +217,36 @@ li {
     height: auto;
     padding: 0.2rem;
     margin: auto;
-   
+
 }
 
-.info{
+.btn-logout {
+    margin-top: 40px;
+    position: absolute;
+    right: 0;
+}
+
+a {
+    font-size: 1.2em;
+    padding: 0.6em 2em;
+    font-weight: bold;
+    border-radius: 2em;
+    border: none;
+    color: white;
+    background-color: #e72870;
+    cursor: pointer;
+    margin: 2rem;
+    float: right;
+}
+
+.btn-logout a:hover {
+
+    background-color: #3ec7d1;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.info {
     margin: 2rem;
     position: absolute;
     margin-top: 1rem;
@@ -226,7 +258,7 @@ li {
     border-radius: 20px 20px 0 0;
 }
 
-.btn-delete{
+.btn-delete {
     position: absolute;
     width: 30px;
     height: 30px;
@@ -235,33 +267,22 @@ li {
     border-radius: 50%;
     border: none;
     padding: 0.5rem;
-    
     cursor: pointer;
     margin: 0.5rem;
- 
- 
-
 }
-
 
 
 @media (max-width: 800px) {
-  
+
     .donut-order {
-      
         width: 200px;
         height: 240px;
-        
     }
 
-    
+
     .donut-order img {
         width: 120px;
-      
     }
 }
-
-
-
 
 </style>

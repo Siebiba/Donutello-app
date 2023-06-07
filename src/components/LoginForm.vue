@@ -11,9 +11,12 @@ let error = ref('')
 
 
 const login = async () => {
+
+  let feedback = document.querySelector('.alert');
+            feedback.textContent = "Checking credentials";
+            feedback.classList.remove('hidden');
  
-    console.log('login');
-  error.value = ''
+    error.value = ''
  
   fetch('https://donutello-api.onrender.com/users/login', {
         method: 'POST',
@@ -30,21 +33,22 @@ const login = async () => {
 
             if (json.status == "success") {
 
+              let feedback = document.querySelector('.alert');
+            feedback.textContent = "Signup success";
+            feedback.classList.remove('hidden');
 
-                console.log("success");
-
-                //when successful login, save token in local storage
-                let token = json.data.token;
-                localStorage.setItem('token', token);
+            let token = json.data.token;
+            localStorage.setItem('token', token);
 
                 // when successful login, redirect to gallery page
                 window.location.href = "#/gallery"
 
             } else {
-                console.log("failed");
+              let feedback = document.querySelector('.alert');
+            feedback.textContent = "Signup failed";
+            feedback.classList.remove('hidden');
             }
         });
-
 }
 
 
@@ -52,7 +56,10 @@ const login = async () => {
 
 <template>
   <div class="login">
-    <h1>Log in</h1>
+    <h1>Login</h1>
+    <div class="alert hidden">
+      Here is some feedback
+    </div>
     <form name="login-form" @submit.prevent="login" >
       <div class="">
         <label for="mail">Username: </label>
@@ -83,8 +90,9 @@ const login = async () => {
 .login h1
 {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 2em;
   margin: 0 0 1em;
+  font-weight: 700;
 }
 
 .login label
@@ -94,10 +102,10 @@ const login = async () => {
 }
 
 .login input {
-border: none;
+
   font-size: 1.2em;
   padding: 0.5em;
-  border-radius: 0.4em;
+  border-radius: 0.2em;
   border: 1px solid #ccc;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
@@ -121,7 +129,8 @@ border: none;
   color: white;
   background-color: #e72870;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 40px;
+  width: 100%;
 }
 
 .btn:active
@@ -137,10 +146,13 @@ border: none;
 
 .alert
 {
-  background-color: #B4C4E7;
+  background-color: rgb(247,242,73);
   padding: 0.5em;
   margin-bottom: 1em;
-  color: #32549d;
+  color: #000000;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 600;
 }
 
 .btn:hover
