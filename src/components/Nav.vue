@@ -1,10 +1,19 @@
+<script setup>
+
+const logout = () => {
+    console.log("logout");
+   localStorage.clear();
+   window.location.href = "#/"
+}
+</script>
+
 <template>
 
     <nav>
         <div class="nav-wrapper">
             <img src="../assets/donuttello-logo.png" alt="">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Log out</a></li>
+                <li><a href="#" @click.prevent="logout">Log out</a></li>
               
               
             </ul>
